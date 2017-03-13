@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>阴影</title>
+	</head>
+	<body>
+		<canvas id="canvas" style="display: block;border: 1px solid #ddd; margin: 50px auto;"></canvas>
+		<script type="text/javascript">
+			window.onload = function(){
+				var canvas = document.getElementById("canvas");
+				canvas.width = 800;
+				canvas.height = 800 ;
+				
+				var ctx = canvas.getContext("2d");
+				ctx.fillStyle = "#058";
+				
+				setShadow(ctx,"gray",20 ,20, 10);
+				
+				ctx.fillRect(200,200,400,400);
+				
+				ctx.font = "bold 60px arial" ;
+				setShadow(ctx,"black",10 ,10, 10);
+				ctx.fillText("CANVAS",300,750);
+				
+			}
+			/*设置阴影*/
+			function setShadow(ctx , color ,offSetX ,offSetY ,blur ){
+				ctx.shadowColor =  color ;
+				ctx.shadowOffsetX = offSetX;
+				ctx.shadowOffsetY = offSetY;
+				ctx.shadowBlur = blur;
+			}
+		</script>
+	</body>
+</html>

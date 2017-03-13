@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>绘制直线</title>
+	</head>
+	<body>
+		<canvas id="canvas" style="display: block;border: 1px solid #ddd; margin: 50px auto;"></canvas>
+		<script type="text/javascript">
+			window.onload = function(){
+				var canvas = document.getElementById("canvas");
+				canvas.width = 800;
+				canvas.height = 800 ;
+				
+				var cxt = canvas.getContext("2d");
+				cxt.lineWidth = 10;
+				
+				cxt.beginPath();
+				cxt.lineTo(100,200);
+				cxt.lineTo(300,400);
+				cxt.lineTo(100,600);
+				cxt.strokeStyle = "red";
+				cxt.stroke();
+				
+				cxt.beginPath();
+				cxt.lineTo(300,200);
+				cxt.lineTo(500,400);
+				cxt.lineTo(300,600);
+				cxt.strokeStyle = "blue";
+				cxt.stroke();
+				
+				cxt.beginPath();
+				cxt.moveTo(500,200);
+				cxt.lineTo(700,400);
+				cxt.lineTo(500,600);
+				cxt.strokeStyle = "#00AACC";
+				cxt.stroke();
+			}
+		</script>
+	</body>
+</html>

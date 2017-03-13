@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<canvas id="canvasa" width="800" height="560" style="float: left; display: block;margin: 0 auto; border: 1px solid #aaa;">
+			您的浏览器不支持canvas
+		</canvas>
+		<canvas id="canvasb" width="800" height="560" style="float: right; display: block;margin: 0 auto; border: 1px solid #aaa;">
+			您的浏览器不支持canvas
+		</canvas>
+		<div style="clear: both"></div>
+
+		<div style="text-align: center; margin-top: 50px; font-size: 20px;">
+			<a href="javascript:filter()">Filter</a>
+		</div>
+		<script type="text/javascript">
+			 var canvasa = document.getElementById("canvasa");
+			 var contexta = canvasa.getContext("2d");
+			 
+			 var canvasb = document.getElementById("canvasb");
+			 var contextb = canvasb.getContext("2d");
+			 
+			 var image = new Image();
+			 
+			 window.onload = function (){
+			 	
+			 	image.src = "autumn.jpg";
+			 	
+			 	image.onload = function (){
+			 		
+			 		contexta.drawImage(image,0,0,canvasa.width , canvasa.height);
+			 		
+			 	}
+			 	
+			 }
+			 
+			 function filter(){
+			 	
+			 }
+			 
+		</script>
+	</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>一片星空</title>
+	</head>
+	<body>
+		<canvas id="canvas" style="display: block;border: 1px solid #ddd; margin: 50px auto;"></canvas>
+		<script type="text/javascript">
+			window.onload = function(){
+				var canvas = document.getElementById("canvas");
+				canvas.width = 1200;
+				canvas.height = 800 ;
+				
+				var ctx = canvas.getContext("2d");
+				
+				/*var skyStyle = ctx.createLinearGradient(0,0,0,canvas.height);
+				skyStyle.addColorStop(0.0 , "black");
+				skyStyle.addColorStop(1.0 , "#035");*/
+				
+				var skyStyle = ctx.createRadialGradient(
+							canvas.width/2,canvas.height,0,
+							canvas.width/2,canvas.height,canvas.height);
+				skyStyle.addColorStop(0.0 , "#035");
+				skyStyle.addColorStop(1.0 ,"black");
+				
+				
+				ctx.fillStyle = skyStyle;
+				ctx.fillRect(0,0, canvas.width,canvas.height);
+				
+				ctx.lineWidth = 3;
+				
+				for(var i =0; i<200; i++){
+					var r = 5 + Math.random()*5;
+					var x = Math.random() * canvas.width;
+					var y = Math.random() * canvas.height*0.65;
+					/*这么设置即可星星都在画布内*/
+					/*var x=Math.abs(Math.random()*canvas.width-40)+20;
+					var y=Math.abs(Math.random()*canvas.height-40)+20;*/
+					var a = Math.random() * 360;
+					
+					drawStar(ctx,x,y,r, a);
+				}
+				
+			}
+			
+			
+			
+			function drawStar(ctx, x,y,R ,rot){
+				ctx.save();
+				
+				ctx.translate(x,y);
+				ctx.rotate(rot/180 * Math.PI);
+				ctx.scale(R,R);
+				
+				startPath(ctx);
+				
+				
+				ctx.fillStyle = "#fb3";
+				/*ctx.strokeStyle ="#fb5";
+				ctx.lineJoin = "round";*/
+				
+				ctx.fill();
+				/*ctx.stroke();*/
+				
+				ctx.restore();
+			}
+			
+			function startPath(ctx){
+				ctx.beginPath();
+				for(var i = 0 ; i < 5 ; i++){
+					ctx.lineTo( Math.cos( (18 + i*72 )/180 * Math.PI),
+					           -Math.sin( (18 + i*72 )/180 * Math.PI) 
+					);
+					ctx.lineTo( Math.cos( (54 + i*72 )/180 * Math.PI) * 0.5,
+					           -Math.sin( (54 + i*72 )/180 * Math.PI) * 0.5
+					);
+				}
+				ctx.closePath();
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>五角星</title>
+	</head>
+	<body>
+		<canvas id="canvas" style="display: block;border: 1px solid #ddd; margin: 50px auto;"></canvas>
+		<script type="text/javascript">
+			window.onload = function(){
+				var canvas = document.getElementById("canvas");
+				canvas.width = 800;
+				canvas.height = 800 ;
+				
+				var ctx = canvas.getContext("2d");
+				
+				
+				ctx.lineWidth = 10;
+				ctx.lineJoin = "bevel";  /*miter round bevel*/
+				ctx.lineCap = "square";  /*butt round square*/
+				drawStar(ctx,300,100, 400,400, 30,"red","yellow");
+				
+			}
+			function drawStar(ctx, R ,r, x,y,rot,fillColor,strokeColor){
+				ctx.beginPath();
+				for(var i = 0 ; i < 5 ; i++){
+					ctx.lineTo( Math.cos( (18 + i*72 - rot)/180 * Math.PI) * R + x ,
+					           -Math.sin( (18 + i*72 - rot)/180 * Math.PI) * R + y
+					);
+					ctx.lineTo( Math.cos( (54 + i*72 - rot)/180 * Math.PI) * r + x ,
+					           -Math.sin( (54 + i*72 - rot)/180 * Math.PI) * r + y
+					);
+				}
+				ctx.closePath();
+				ctx.strokeStyle =strokeColor;
+				ctx.fillStyle = fillColor;
+				ctx.fill();
+				ctx.stroke();
+			}
+		</script>
+	</body>
+</html>

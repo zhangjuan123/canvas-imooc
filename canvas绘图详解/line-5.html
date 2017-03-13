@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>封闭</title>
+	</head>
+	<body>
+		<canvas id="canvas" style="display: block;border: 1px solid #ddd; margin: 50px auto;"></canvas>
+		<script type="text/javascript">
+			window.onload = function(){
+				var canvas = document.getElementById("canvas");
+				canvas.width = 800;
+				canvas.height = 800 ;
+				
+				var cxt = canvas.getContext("2d");
+				drawRect(cxt,100,100,400,400,10,"#058","red");
+			}
+			function drawRect(cxt,x,y,width,height,borderWidth,borderColor,fillColor){
+				cxt.beginPath();
+				cxt.lineTo(x,y);
+				cxt.lineTo(x+width,y);
+				cxt.lineTo(x+width,y+height);
+				cxt.lineTo(x,y+height);
+				cxt.closePath();
+				
+				cxt.fillStyle = fillColor ;
+				cxt.strokeStyle = borderColor ;
+				cxt.lineWidth = borderWidth;
+				
+				cxt.fill();
+				cxt.stroke();
+				
+			}
+		</script>
+	</body>
+</html>

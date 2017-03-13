@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<canvas id="canvas" style="display: block;border: 1px solid #ddd; margin: 50px auto;"></canvas>
+		<script type="text/javascript">
+			window.onload = function(){
+				var canvas = document.getElementById("canvas");
+				canvas.width = 800;
+				canvas.height = 800 ;
+				
+				var ctx = canvas.getContext("2d");
+				
+				ctx.save();
+				ctx.fillStyle = "red";
+				ctx.translate(100,100);
+				ctx.fillRect(0,0,400,400);
+				/*ctx.translate(-100,-100);*/
+				ctx.restore();
+				
+				ctx.save();
+				ctx.fillStyle = "green";
+				ctx.translate(300,300);
+				ctx.fillRect(0,0,400,400);
+				/*ctx.translate(-300,-300);*/
+				ctx.restore();
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>封闭</title>
+	</head>
+	<body>
+		<canvas id="canvas" style="display: block;border: 1px solid #ddd; margin: 50px auto;"></canvas>
+		<script type="text/javascript">
+			window.onload = function(){
+				var canvas = document.getElementById("canvas");
+				canvas.width = 800;
+				canvas.height = 800 ;
+				
+				var cxt = canvas.getContext("2d");
+				drawRect(cxt,100,100,400,400,10,"#058","red");
+				drawRect2(cxt,300,300,400,400,10,"#058","rgba(0,256,0,0.5)");
+				
+			}
+			function drawRect(cxt,x,y,width,height,borderWidth,/*optional*/borderColor, /*optional*/fillColor){
+				cxt.beginPath();
+				cxt.rect(x,y,width,height);
+				cxt.closePath();
+				
+				cxt.fillStyle = fillColor ;
+				cxt.strokeStyle = borderColor || "black";;
+				cxt.lineWidth = borderWidth || 1;;
+				
+				cxt.fill();
+				cxt.stroke();
+				
+			}
+			function drawRect2(cxt,x,y,width,height,borderWidth,/*optional*/borderColor,/*optional*/fillColor){
+				cxt.fillStyle = fillColor ;
+				cxt.strokeStyle = borderColor || "black";
+				cxt.lineWidth = borderWidth || 1;
+				
+				cxt.fillRect(x,y,width,height);
+				cxt.strokeRect(x,y,width,height);
+				
+			}
+		</script>
+	</body>
+</html>

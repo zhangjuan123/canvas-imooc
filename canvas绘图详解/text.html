@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>文字</title>
+	</head>
+	<body>
+		<canvas id="canvas" style="display: block;border: 1px solid #ddd; margin: 50px auto;"></canvas>
+		<script type="text/javascript">
+			window.onload = function(){
+				var canvas = document.getElementById("canvas");
+				canvas.width = 1200;
+				canvas.height = 800 ;
+				
+				var cxt = canvas.getContext("2d");
+				
+				cxt.font = " bold 40px arial" ;
+				cxt.fillStyle = "#058";
+				
+				cxt.fillText("欢迎大家学习canvas ！ " ,200, 100);
+				
+				cxt.lineWidth = 1 ;
+				cxt.strokeStyle = "#008000"
+				cxt.strokeText("欢迎大家学习canvas ！ " ,200, 150);
+				
+				cxt.fillText("我是有最大宽度的文字 ！ " ,200, 200 ,300);  //第四个参数为可选 表示最大宽度
+				cxt.strokeText("我是有最大宽度的文字 ！ " ,200,250 ,300);
+				
+				var textStyle = cxt.createLinearGradient(0,0,800,0);
+				textStyle.addColorStop(0.0,"red");
+				textStyle.addColorStop(0.35,"yellow");
+				textStyle.addColorStop(0.5,"green");
+				textStyle.addColorStop(0.75,"blue");
+				textStyle.addColorStop(1.0,"black");
+				var textStrokeStyle = cxt.createRadialGradient(200,200,10,400,400,500);
+				textStrokeStyle.addColorStop(0.0,"red");
+				textStrokeStyle.addColorStop(0.35,"yellow");
+				textStrokeStyle.addColorStop(0.5,"green");
+				textStrokeStyle.addColorStop(0.75,"blue");
+				textStrokeStyle.addColorStop(1.0,"black");
+				cxt.fillStyle = textStyle ;
+				cxt.strokeStyle = textStrokeStyle ;
+				cxt.fillText("我是有渐变背景色的文字 ！ " ,200, 300);
+				cxt.strokeText("我是有渐变背景色的文字 ！ " ,200, 350);
+				
+				var backimg = new Image();
+				backimg.src = "images/brike.jpg";
+				backimg.onload = function (){
+					var patten = cxt.createPattern(backimg , "repeat");
+					cxt.fillStyle = patten ;
+					cxt.strokeStyle = patten ;
+					cxt.font = "bold 100px arial";
+					cxt.fillText("我是有背景图片的文字哦！",0,450,1200);
+					cxt.strokeText("我是有背景图片的文字哦！",0,550);
+					
+				}
+			}
+		</script>
+	</body>
+</html>

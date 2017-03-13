@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>clip 裁剪</title>
+	</head>
+	<body>
+		<canvas id="canvas" style="display: block;border: 1px solid #ddd; margin: 50px auto;"></canvas>
+		<script type="text/javascript">
+			
+			var searchLight = {x:400,y:400,r:150,vx:Math.random()*5+10, vy:Math.random()*5+10}
+			window.onload = function(){
+				var canvas = document.getElementById("canvas");
+				canvas.width = 800;
+				canvas.height = 800 ;
+				
+				var ctx = canvas.getContext("2d");
+				
+				setInterval(function(){
+					draw(ctx);
+					update(canvas.width,canvas.height);
+				},40)
+				
+			}
+			function draw(ctx){
+				var canvas = ctx.canvas;
+				ctx.clearRect(0,0,canvas.width,canvas.height);
+				ctx.save();
+				
+				ctx.fillStyle = "black";
+				ctx.fillRect(0,0,canvas.width,canvas.height );
+				
+				ctx.beginPath();
+				ctx.arc(searchLight.x,searchLight.y,searchLight.r,0,2*Math.PI);
+				ctx.fillStyle = "#fff";
+				ctx.fill();
+				ctx.clip();
+				
+				ctx.font = "bold 60px arial" ;
+				ctx.textAlign ="center";
+				ctx.textBaseline = "middle";
+				ctx.fillStyle = "#058";
+				ctx.fillText("CANVAS",canvas.width / 2,canvas.height/4);
+				ctx.fillText("CANVAS",canvas.width / 2,canvas.height/2);
+				ctx.fillText("CANVAS",canvas.width / 2,canvas.height*3/4);
+				
+				ctx.restore();
+			}
+			
+			function update(canvasWidth,canvasHeight){
+				searchLight.x += searchLight.vx ;
+				searchLight.y += searchLight.vy ;
+				//左边
+				if(searchLight.x -searchLight.r<=0){
+					searchLight.vx = -searchLight.vx ;
+					searchLight.x =searchLight.r;
+				}
+				//右边
+				if(searchLight.x+searchLight.r>=canvasWidth){
+					searchLight.vx = -searchLight.vx ;
+					searchLight.x =canvasWidth-searchLight.r;
+				}
+				//上边
+				if(searchLight.y -searchLight.r<=0){
+					searchLight.vy = -searchLight.vy ;
+					searchLight.y =searchLight.r;
+				}
+				//下边
+				if(searchLight.y +searchLight.r>=canvasHeight){
+					searchLight.vy = -searchLight.vy ;
+					searchLight.y =canvasHeight-searchLight.r;
+				}
+			}
+		</script>
+	</body>
+</html>

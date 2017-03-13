@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>覆盖方式</title>
+		<style type="text/css">
+			#buttons {width: 1200px; margin:20px auto;clear: both; overflow: hidden;}
+			#buttons  a{font-size: 18px; outline-style: none;float: left; margin-right: 10px;}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas" style="display: block;border: 1px solid #ddd; margin: 50px auto;"></canvas>
+		<div id="buttons">
+			<a href="#">source-over</a>
+			<a href="#">source-atop</a>
+			<a href="#">source-in</a>
+			<a href="#">source-out</a>
+			<a href="#">destination-over</a>
+			<a href="#">destination-atop</a>
+			<a href="#">destination-in</a>
+			<a href="#">destination-out</a>
+			<a href="#">lighter</a>
+			<a href="#">copy</a>
+			<a href="#">xor</a>
+		</div>
+		<script type="text/javascript">
+			window.onload = function(){
+				draw("source-over");
+				var buttons = document.getElementById("buttons").getElementsByTagName("a");
+				for(var i=0;i<buttons.length; i++){
+					buttons[i].onclick = function(){
+						draw(this.text);
+						return false;
+					}
+				}
+			}
+			
+			function draw(compositeStyle){
+				var canvas = document.getElementById("canvas");
+				canvas.width = 1200;
+				canvas.height = 700 ;
+				
+				var cxt = canvas.getContext("2d");
+				
+				cxt.clearRect(0,0, canvas.width , canvas.height);
+				
+				//draw a title
+				cxt.font = "bold 40px arial";
+				cxt.textAlign = "center" ;
+				cxt.textBaseline ="middle" ;
+				cxt.fillStyle ="#810213";
+				cxt.fillText("globalCompositeOperation =" + compositeStyle,canvas.width / 2 , 60);
+				
+				//draw a rect
+				cxt.fillStyle = "blue";
+				cxt.fillRect(100,200,400,400);
+				
+				//draw a triangle
+				cxt.globalCompositeOperation =compositeStyle;  
+				cxt.fillStyle = "red";
+				cxt.beginPath();
+				cxt.moveTo(400,300);
+				cxt.lineTo(650,700);
+				cxt.lineTo(150,700);
+				cxt.closePath();
+				cxt.fill();
+					
+			}
+		</script>
+	</body>
+</html>

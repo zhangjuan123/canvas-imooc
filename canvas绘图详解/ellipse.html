@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<canvas id="canvas" style="display: block;border: 1px solid #ddd; margin: 50px auto;"></canvas>
+		<script type="text/javascript">
+			window.onload = function(){
+				var canvas = document.getElementById("canvas");
+				canvas.width = 800;
+				canvas.height = 800 ;
+				
+				var cxt = canvas.getContext("2d");
+				if(cxt.ellipse){
+					cxt.ellipse(400,400,300,200,0, 0 ,2*Math.PI);
+					cxt.lineWidth = 5;
+					cxt.strokeStyle = "#008000";
+					cxt.stroke();
+					
+				}else{
+					alert("no ellipsp");
+				}
+			}
+		</script>
+	</body>
+</html>

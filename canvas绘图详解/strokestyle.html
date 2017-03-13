@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<canvas id="canvas" style="display: block;border: 1px solid #ddd; margin: 50px auto;"></canvas>
+		<script type="text/javascript">
+			window.onload = function(){
+				var canvas = document.getElementById("canvas");
+				canvas.width = 800;
+				canvas.height = 800 ;
+				
+				var ctx = canvas.getContext("2d");
+				
+				var linearStyle = ctx.createLinearGradient(0,0,0,800);
+				linearStyle.addColorStop(0.0 , "#fff");
+				linearStyle.addColorStop(0.25 , "#ff0");
+				linearStyle.addColorStop(0.5 , "blue");
+				linearStyle.addColorStop(0.75 , "#ff0");
+				linearStyle.addColorStop(1.0 , "#fff");
+				
+				
+				var radialStyle = ctx.createRadialGradient(400,400,0,400,400,400);
+				radialStyle.addColorStop(0.0 , "#fff");
+				radialStyle.addColorStop(0.25 , "#ff0");
+				radialStyle.addColorStop(0.5 , "blue");
+				radialStyle.addColorStop(0.75 , "#ff0");
+				radialStyle.addColorStop(1.0 , "#fff");
+				
+				ctx.moveTo(10,10);
+				ctx.lineTo(600,800);
+				ctx.lineWidth = 10;
+				ctx.strokeStyle = radialStyle;
+				
+				ctx.stroke();
+				/*var backgroundImg = new Image();
+				backgroundImg.src = "images/brike.jpg";
+				backgroundImg.onload = function(){
+				var patten = ctx.createPattern(backgroundImg , "repeat");
+					ctx.fillStyle = patten;
+					ctx.fillRect(0,0,800,800);
+					
+					
+				}*/
+				
+			}
+		</script>
+	</body>
+</html>

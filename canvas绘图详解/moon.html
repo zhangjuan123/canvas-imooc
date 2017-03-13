@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>弯月</title>
+	</head>
+	<body>
+		<canvas id="canvas" style="display: block;border: 1px solid #ddd; margin: 50px auto;"></canvas>
+		<script type="text/javascript">
+			window.onload = function(){
+				var canvas = document.getElementById("canvas");
+				canvas.width = 800;
+				canvas.height = 800 ;
+				
+				var cxt = canvas.getContext("2d");
+				
+				cxt.arc(400,400,300,0.5*Math.PI , Math.PI*3/2 , true);
+				
+				cxt.moveTo(400,100);
+				cxt.arcTo(1200,400, 400,700, (400-100) *dis(400,100,1200,400)/(1200-400));
+				cxt.stroke();
+			}
+			
+			function dis(x1,y1,x2,y2){
+				return Math.sqrt((x1-x2)*(x1-x2) + (y1-y2) *(y1-y2));
+			}
+		</script>
+	</body>
+</html>

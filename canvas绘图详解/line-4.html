@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>封闭</title>
+	</head>
+	<body>
+		<canvas id="canvas" style="display: block;border: 1px solid #ddd; margin: 50px auto;"></canvas>
+		<script type="text/javascript">
+			window.onload = function(){
+				var canvas = document.getElementById("canvas");
+				canvas.width = 800;
+				canvas.height = 800 ;
+				
+				var cxt = canvas.getContext("2d");
+				cxt.beginPath();
+				cxt.moveTo(100,350);
+				cxt.lineTo(500,350);
+				cxt.lineTo(500,200);
+				cxt.lineTo(700,400);
+				cxt.lineTo(500,600);
+				cxt.lineTo(500,450);
+				cxt.lineTo(100,450);
+				cxt.closePath();
+				cxt.lineWidth = 10;
+				
+				cxt.fillStyle = "yellow";
+				cxt.strokeStyle = "#00AACC";
+				
+				cxt.fill();
+				cxt.stroke();
+				
+			}
+		</script>
+	</body>
+</html>

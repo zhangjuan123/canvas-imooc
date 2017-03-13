@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>一片星空</title>
+		
+	</head>
+	<body>
+		<canvas id="canvas" style="display: block;border: 1px solid #ddd; margin: 50px auto;"></canvas>
+		<script type="text/javascript">
+			window.onload = function(){
+				var canvas = document.getElementById("canvas");
+				canvas.width = 1200;
+				canvas.height = 800 ;
+				
+				var ctx = canvas.getContext("2d");
+				
+				/*var skyStyle = ctx.createLinearGradient(0,0,0,canvas.height);
+				skyStyle.addColorStop(0.0 , "black");
+				skyStyle.addColorStop(1.0 , "#035");*/
+				
+				var skyStyle = ctx.createRadialGradient(
+							canvas.width/2,canvas.height,0,
+							canvas.width/2,canvas.height,canvas.height);
+				skyStyle.addColorStop(0.0 , "#035");
+				skyStyle.addColorStop(1.0 ,"black");
+				
+				
+				ctx.fillStyle = skyStyle;
+				ctx.fillRect(0,0, canvas.width,canvas.height);
+				
+				ctx.lineWidth = 3;
+				
+				for(var i =0; i<200; i++){
+					var r = 5 + Math.random()*5;
+					var x = Math.random() * canvas.width;
+					var y = Math.random() * canvas.height*0.65;
+					/*这么设置即可星星都在画布内*/
+					/*var x=Math.abs(Math.random()*canvas.width-40)+20;
+					var y=Math.abs(Math.random()*canvas.height-40)+20;*/
+					var a = Math.random() * 360;
+					
+					drawStar(ctx,x,y,r, a);
+					
+				}
+				
+				ctx.shadowColor = "gray";
+				ctx.shadowOffsetX = 3;
+				ctx.shadowOffsetY = 3;
+				ctx.shadowBlur = 10;
+				
+				fillMoon(ctx,2,900,200,100,30);
+				drawland(ctx);
+				
+				
+				//文字
+				ctx.font = "bold 40px arial";
+				var textStyle = ctx.createLinearGradient(100,0,500,0);
+					textStyle.addColorStop(0.0 , "red");
+					textStyle.addColorStop(0.35 , "blue");
+					textStyle.addColorStop(0.75 , "green");
+					textStyle.addColorStop(1.0 ,"yellow");
+				ctx.fillStyle =  textStyle;
+				ctx.save();
+				ctx.translate(-100,50);
+				ctx.rotate(-25*Math.PI/180);
+				ctx.fillText("嘿！一起来看流星啊！",0,400);
+				
+				
+				ctx.restore();
+			}
+			
+			
+			/*星星*/
+			function drawStar(ctx, x,y,R ,rot){
+				ctx.save();
+				
+				ctx.translate(x,y);
+				ctx.rotate(rot/180 * Math.PI);
+				ctx.scale(R,R);
+				
+				startPath(ctx);
+				
+				
+				ctx.fillStyle = "#fb3";
+				/*ctx.strokeStyle ="#fb5";
+				ctx.lineJoin = "round";*/
+				
+				ctx.fill();
+				/*ctx.stroke();*/
+				
+				ctx.restore();
+			}
+			
+			function startPath(ctx){
+				ctx.beginPath();
+				for(var i = 0 ; i < 5 ; i++){
+					ctx.lineTo( Math.cos( (18 + i*72 )/180 * Math.PI),
+					           -Math.sin( (18 + i*72 )/180 * Math.PI) 
+					);
+					ctx.lineTo( Math.cos( (54 + i*72 )/180 * Math.PI) * 0.5,
+					           -Math.sin( (54 + i*72 )/180 * Math.PI) * 0.5
+					);
+				}
+				ctx.closePath();
+			}
+			
+			/*月亮*/
+			function fillMoon(ctx , d , x , y , R , rot , /*optional*/ fillColor ){
+				ctx.save();
+				ctx.translate(x , y);
+				ctx.rotate(rot * Math.PI / 180);
+				ctx.scale(R , R);
+				pathMoon( ctx , d );
+				ctx.fillStyle = fillColor || "#fb5";
+				ctx.fill();
+				ctx.restore();
+			}
+			
+			function pathMoon(ctx,d){
+				ctx.beginPath();
+				ctx.arc(0,0,1,0.5*Math.PI, 1.5*Math.PI ,true);
+				ctx.moveTo(0,-1);
+				ctx.arcTo(d,0,0,1,dis(0,-1,d,0)/d);
+				ctx.closePath();
+			}
+			
+			function dis(x1,y1,x2,y2){
+				return Math.sqrt((x1-x2)*(x1-x2) + (y1-y2) *(y1-y2));
+			}
+			
+			/*草地*/
+			
+			//http://www.j--d.com/bezier 7  三次贝塞尔曲线
+			function drawland(ctx){
+				ctx.save();
+				
+				ctx.beginPath();
+				ctx.moveTo(0,600);
+				ctx.bezierCurveTo(500,400,660,800,1200,600)
+				ctx.lineTo(1200,800);
+				ctx.lineTo(0,800);
+				
+				var landStyle = ctx.createLinearGradient(0,800,0,600);
+				landStyle.addColorStop(0.0,"#030");
+				landStyle.addColorStop(1.0,"#580");
+				ctx.fillStyle = landStyle ;
+				ctx.fill();
+				ctx.closePath();
+				ctx.restore();
+			}
+			
+		</script>
+		
+	</body>
+</html>

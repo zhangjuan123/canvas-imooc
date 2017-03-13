@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<canvas id="canvas" style="display: block;border: 1px solid #ddd; margin: 50px auto;"></canvas>
+		<script type="text/javascript">
+			window.onload = function(){
+				var canvas = document.getElementById("canvas");
+				canvas.width = 800;
+				canvas.height = 800 ;
+				
+				var ctx = canvas.getContext("2d");
+				
+				
+				
+				var backCanvas =createBackCanvas();
+				var patten = ctx.createPattern(backCanvas , "repeat");
+				ctx.fillStyle = patten ;
+				ctx.fillRect(0,0,800,800);
+				
+				
+			}
+			
+			function createBackCanvas(){
+				var backCanvas = document.createElement("canvas");
+				backCanvas.width = 100;
+				backCanvas.height = 100;
+				var backCanvasContext = backCanvas.getContext("2d");
+				drawStar(backCanvasContext,50,50, 50,0);
+				return backCanvas;
+			}
+			function drawStar(ctx, x,y,R ,rot){
+				ctx.save();
+				
+				ctx.translate(x,y);
+				ctx.rotate(rot/180 * Math.PI);
+				ctx.scale(R,R);
+				
+				startPath(ctx);
+				
+				
+				ctx.fillStyle = "#fb3";
+				/*ctx.strokeStyle ="#fb5";
+				ctx.lineJoin = "round";*/
+				
+				ctx.fill();
+				/*ctx.stroke();*/
+				
+				ctx.restore();
+			}
+			
+			function startPath(ctx){
+				ctx.beginPath();
+				for(var i = 0 ; i < 5 ; i++){
+					ctx.lineTo( Math.cos( (18 + i*72 )/180 * Math.PI),
+					           -Math.sin( (18 + i*72 )/180 * Math.PI) 
+					);
+					ctx.lineTo( Math.cos( (54 + i*72 )/180 * Math.PI) * 0.5,
+					           -Math.sin( (54 + i*72 )/180 * Math.PI) * 0.5
+					);
+				}
+				ctx.closePath();
+			}
+		</script>
+	</body>
+</html>

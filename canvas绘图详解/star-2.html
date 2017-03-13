@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>一片星空</title>
+	</head>
+	<body>
+		<canvas id="canvas" style="display: block;border: 1px solid #ddd; margin: 50px auto;"></canvas>
+		<script type="text/javascript">
+			window.onload = function(){
+				var canvas = document.getElementById("canvas");
+				canvas.width = 800;
+				canvas.height = 800 ;
+				
+				var ctx = canvas.getContext("2d");
+				
+				ctx.fillStyle ="black";
+				ctx.fillRect(0,0, canvas.width,canvas.height);
+				
+				ctx.lineWidth = 3;
+				ctx.lineJoin = "round";  /*miter round bevel*/
+				ctx.lineCap = "square";  /*butt round square*/
+				for(var i =0; i<200; i++){
+					var r = 10 + Math.random()*10;
+					/*var x = Math.random() * canvas.width;
+					var y = Math.random() * canvas.height;*/
+					/*这么设置即可星星都在画布内*/
+					var x=Math.abs(Math.random()*canvas.width-40)+20;
+					var y=Math.abs(Math.random()*canvas.height-40)+20;
+					var a = Math.random() * 360;
+					
+					drawStar(ctx,r,r/2, x,y, a);
+				}
+				
+				
+			}
+			function drawStar(ctx, R ,r, x,y,rot){
+				ctx.beginPath();
+				for(var i = 0 ; i < 5 ; i++){
+					ctx.lineTo( Math.cos( (18 + i*72 - rot)/180 * Math.PI) * R + x ,
+					           -Math.sin( (18 + i*72 - rot)/180 * Math.PI) * R + y
+					);
+					ctx.lineTo( Math.cos( (54 + i*72 - rot)/180 * Math.PI) * r + x ,
+					           -Math.sin( (54 + i*72 - rot)/180 * Math.PI) * r + y
+					);
+				}
+				ctx.closePath();
+				ctx.strokeStyle ="#fb5";
+				ctx.fillStyle = "#fb3";
+				ctx.fill();
+				ctx.stroke();
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>字体样式</title>
+	</head>
+	<body>
+		<canvas id="canvas" style="display: block;border: 1px solid #ddd; margin: 50px auto;"></canvas>
+		<script type="text/javascript">
+			window.onload = function(){
+				var canvas = document.getElementById("canvas");
+				canvas.width = 800;
+				canvas.height = 800 ;
+				
+				var cxt = canvas.getContext("2d");
+				
+				cxt.fillStyle = " #058 " ;
+				
+				cxt.font = "bold 40px sans-serif";
+				cxt.textAlign = "left";
+				cxt.fillText("欢迎大家学习《Canvas》绘图详解 ！" , 400 ,200);
+				
+				cxt.font = "italic bold 40px sans-serif";
+				cxt.textAlign = "center";
+				cxt.fillText("欢迎大家学习《Canvas》绘图详解 ！" , 400 ,300);
+				
+				cxt.font = "oblique bold 40px sans-serif";
+				cxt.textAlign = "right";
+				cxt.fillText("欢迎大家学习《Canvas》绘图详解 ！" , 400 ,400);
+				
+				cxt.font = "small-caps bolder 40px sans-serif";
+				cxt.textAlign = "left";
+				cxt.fillText("欢迎大家学习《Canvas》绘图详解 ！" , 400 ,500);
+			}
+		</script>
+	</body>
+</html>
